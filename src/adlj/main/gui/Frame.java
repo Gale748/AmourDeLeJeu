@@ -21,6 +21,7 @@ public class Frame extends JFrame{
 	public static Frame GameFrame;
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
+	static Image projectile_Image = ImageLoader.getImageFrom("projectile.png");
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -68,7 +69,7 @@ public class Frame extends JFrame{
 	}
 	private void paintComponent(Graphics g){
 		for(Projectile p: Projectile.projectiles){
-			g.fillRect((int)p.x, (int)p.y, p.width, p.height);
+			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		g.fillRect((int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height);
 	}
