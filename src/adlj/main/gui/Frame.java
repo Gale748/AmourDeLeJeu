@@ -1,5 +1,6 @@
 package adlj.main.gui;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,6 +19,8 @@ public class Frame extends JFrame{
 	static int WIDTH = 800;
 	static int HEIGHT = 600;
 	static Image img;
+	static int FPS= 0;
+	static int BufferedFPS = 0;
 	public static Frame GameFrame;
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
@@ -60,17 +63,33 @@ public class Frame extends JFrame{
 				}
 			}
 		}.start();
+		new Thread(){
+			public void run(){
+				try{
+					while(true){
+						Thread.sleep(1000);
+						BufferedFPS = FPS;
+						FPS = 0;
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}.start();
 		new PlayerShip(WIDTH/2-25,HEIGHT*5/6-25,50,50);
 	}
 	public void paint(Graphics g){
 		img = createImage(WIDTH,HEIGHT);
 		paintComponent(img.getGraphics());
 		g.drawImage(img, 0, 0,WIDTH,HEIGHT, this);
+		FPS++;
 	}
 	private void paintComponent(Graphics g){
+		g.drawString("FPS: " + BufferedFPS,5 , 590);
 		for(Projectile p: Projectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		g.fillRect((int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height);
+		
 	}
 }
