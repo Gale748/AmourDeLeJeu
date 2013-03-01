@@ -28,7 +28,7 @@ public class KListener implements KeyListener{
 			}.start();
 		}
 		//D
-				if(e.getKeyCode() == KeyEvent.VK_D){
+				if(e.getKeyCode() == KeyEvent.VK_LEFT){
 					new Thread(){
 						public void run(){
 							try{
