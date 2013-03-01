@@ -1,7 +1,11 @@
 package adlj.main.gui;
 
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -34,6 +38,10 @@ public class Frame extends JFrame{
 	}
 	public static void init(){
 		GameFrame = new Frame();
+		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+		    cursorImg, new Point(0, 0), "blank cursor");
+		GameFrame.getContentPane().setCursor(blankCursor);
 		//Paint Thread
 		new Thread(){
 			public void run(){
