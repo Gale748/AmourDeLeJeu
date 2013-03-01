@@ -25,6 +25,8 @@ public class Frame extends JFrame{
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
 	static Image projectile_Image = ImageLoader.getImageFrom("projectile.png");
+
+	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -89,7 +91,7 @@ public class Frame extends JFrame{
 		for(Projectile p: Projectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
-		g.fillRect((int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height);
+		g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
 		
 	}
 }
