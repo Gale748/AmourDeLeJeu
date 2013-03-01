@@ -28,6 +28,7 @@ public class MListener implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getButton()==e.BUTTON1){
 		pressed = true;
 		new Thread(){
 			public void run(){
@@ -44,7 +45,7 @@ public class MListener implements MouseListener{
 					e.printStackTrace();
 				}
 			}
-		}.start();
+		}.start();}
 	}
 
 	@Override
