@@ -1,6 +1,5 @@
 package adlj.main.gui;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,21 +9,23 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import adlj.main.entity.Enemy;
 import adlj.main.entity.PlayerShip;
 import adlj.main.entity.Projectile;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
+import adlj.main.threads.EnemySpawner;
 
 public class Frame extends JFrame{
-	static int WIDTH = 800;
-	static int HEIGHT = 600;
+	public static int WIDTH = 800;
+	public static int HEIGHT = 600;
 	static Image img;
 	static int FPS= 0;
 	static int BufferedFPS = 0;
 	public static Frame GameFrame;
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
-	static Image projectile_Image = ImageLoader.getImageFrom("projectile.png");
+	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
@@ -78,6 +79,7 @@ public class Frame extends JFrame{
 				}
 			}
 		}.start();
+		new EnemySpawner().start();
 		new PlayerShip(WIDTH/2-25,HEIGHT*5/6-25,50,50);
 	}
 	public void paint(Graphics g){
@@ -87,10 +89,17 @@ public class Frame extends JFrame{
 		FPS++;
 	}
 	private void paintComponent(Graphics g){
+		//FPS
 		g.drawString("FPS: " + BufferedFPS,5 , 590);
+		//Projectiles
 		for(Projectile p: Projectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
+		//Enemies
+		for(Enemy p: Enemy.enemies){
+			g.fillRect((int)p.x, (int)p.y, p.width, p.height);
+		}
+		//Ship
 		g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
 		
 	}
