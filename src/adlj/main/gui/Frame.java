@@ -22,6 +22,7 @@ public class Frame extends JFrame{
 	static Image img;
 	static int FPS= 0;
 	static int BufferedFPS = 0;
+	public static int score = 0;
 	public static Frame GameFrame;
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
@@ -90,7 +91,7 @@ public class Frame extends JFrame{
 	}
 	private void paintComponent(Graphics g){
 		//FPS
-		g.drawString("FPS: " + BufferedFPS,5 , 590);
+		g.drawString("FPS: " + BufferedFPS + " Score: " + score,5 , 590);
 		//Projectiles
 		for(Projectile p: Projectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);

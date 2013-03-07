@@ -52,6 +52,6 @@ public class Enemy {
 	private void onPlayerCollision(){
 		
 	}private void onProjectileCollision(){
-		
+		Frame.score+=10;
 	}
 }
