@@ -32,8 +32,14 @@ public class Enemy {
 							if(r.intersects(pr)){
 								enemies.remove(e);
 								Projectile.projectiles.remove(p);
+								onProjectileCollision();
 								this.join();
 							}
+						}
+						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
+							enemies.remove(e);
+							onPlayerCollision();
+							this.join();
 						}
 						Thread.sleep(2);
 					}
@@ -42,5 +48,10 @@ public class Enemy {
 				}
 			}
 		}.start();
+	}
+	private void onPlayerCollision(){
+		
+	}private void onProjectileCollision(){
+		
 	}
 }
