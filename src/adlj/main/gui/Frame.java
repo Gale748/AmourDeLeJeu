@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -27,6 +28,8 @@ public class Frame extends JFrame{
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
 	static long startTime = System.currentTimeMillis();
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
+	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
+	static Random rand = new Random();
 
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
@@ -98,7 +101,7 @@ public class Frame extends JFrame{
 		}
 		//Enemies
 		for(Enemy p: Enemy.enemies){
-			g.fillRect((int)p.x, (int)p.y, p.width, p.height);
+			g.drawImage(enemy_Image[rand.nextInt(2)],(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		//Ship
 		g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
