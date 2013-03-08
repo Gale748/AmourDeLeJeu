@@ -29,7 +29,6 @@ public class Frame extends JFrame{
 	static long startTime = System.currentTimeMillis();
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
-	static Random rand = new Random();
 
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
@@ -101,7 +100,7 @@ public class Frame extends JFrame{
 		}
 		//Enemies
 		for(Enemy p: Enemy.enemies){
-			g.drawImage(enemy_Image[rand.nextInt(2)],(int)p.x, (int)p.y, p.width, p.height,this);
+			g.drawImage(enemy_Image[p.type],(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		//Ship
 		g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);

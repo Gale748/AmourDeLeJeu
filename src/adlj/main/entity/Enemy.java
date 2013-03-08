@@ -2,6 +2,7 @@ package adlj.main.entity;
 
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import adlj.main.gui.Frame;
@@ -9,6 +10,7 @@ import adlj.main.gui.Frame;
 public class Enemy {
 	public double x, y,dx,dy;
 	public int width, height;
+	public int type = new Random().nextInt(2);
 	public static List<Enemy> enemies = new CopyOnWriteArrayList<Enemy>();
 	public Enemy(double x, double y, int w, int h, double dx, double dy){
 		this.x= x ;

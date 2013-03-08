@@ -10,7 +10,7 @@ public class EnemySpawner extends Thread{
 		try{
 			Thread.sleep(3000);
 			while(true){
-				new Enemy(rand.nextInt(700) + 50, -50,50,50,0,1.2);
+				new Enemy(rand.nextInt(700) + 50, -50,50,50,0,0.6);
 				Thread.sleep(1000);
 			}
 		}catch(Exception e){
