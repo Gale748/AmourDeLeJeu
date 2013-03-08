@@ -6,11 +6,11 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 import javax.swing.JFrame;
 
 import adlj.main.entity.Enemy;
+import adlj.main.entity.EnemyProjectile;
 import adlj.main.entity.PlayerShip;
 import adlj.main.entity.Projectile;
 import adlj.main.listeners.MListener;
@@ -96,6 +96,9 @@ public class Frame extends JFrame{
 		g.drawString("FPS: " + BufferedFPS + " Score: " + score,5 , 590);
 		//Projectiles
 		for(Projectile p: Projectile.projectiles){
+			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
+		}
+		for(EnemyProjectile p: EnemyProjectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		//Enemies

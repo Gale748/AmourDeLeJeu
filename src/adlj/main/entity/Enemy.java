@@ -50,6 +50,18 @@ public class Enemy {
 				}
 			}
 		}.start();
+		new Thread(){
+			public void run(){
+				try{
+					while(e != null){
+						Thread.sleep(800);
+						new EnemyProjectile(e.x - 5, e.y, 10, 20,0, 1, type);
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+			}
+		}
+		}.start();
 	}
 	private void onPlayerCollision(){
 		
