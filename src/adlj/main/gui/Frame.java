@@ -29,6 +29,7 @@ public class Frame extends JFrame{
 	static long startTime = System.currentTimeMillis();
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
+	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
 
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
@@ -99,7 +100,7 @@ public class Frame extends JFrame{
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		for(EnemyProjectile p: EnemyProjectile.projectiles){
-			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
+			g.drawImage(enemyProjectile_Image[p.type],(int)p.x, (int)p.y, p.width, p.height,this);
 		}
 		//Enemies
 		for(Enemy p: Enemy.enemies){

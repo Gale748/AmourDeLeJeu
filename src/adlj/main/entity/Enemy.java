@@ -10,6 +10,7 @@ import adlj.main.gui.Frame;
 public class Enemy {
 	public double x, y,dx,dy;
 	public int width, height;
+	private boolean exists = true;
 	public int type = new Random().nextInt(2);
 	public static List<Enemy> enemies = new CopyOnWriteArrayList<Enemy>();
 	public Enemy(double x, double y, int w, int h, double dx, double dy){
@@ -35,12 +36,14 @@ public class Enemy {
 								enemies.remove(e);
 								Projectile.projectiles.remove(p);
 								onProjectileCollision();
+								e.exists = false;
 								this.join();
 							}
 						}
 						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
 							enemies.remove(e);
 							onPlayerCollision();
+							e.exists = false;
 							this.join();
 						}
 						Thread.sleep(2);
@@ -53,9 +56,10 @@ public class Enemy {
 		new Thread(){
 			public void run(){
 				try{
-					while(e != null){
+					while(exists){
 						Thread.sleep(800);
-						new EnemyProjectile(e.x - 5, e.y, 10, 20,0, 1, type);
+						if(exists)
+						new EnemyProjectile(e.x + e.width/2 - 5, e.y+10, 10, 20,0, 1, type);
 					}
 				}catch(Exception e){
 					e.printStackTrace();
