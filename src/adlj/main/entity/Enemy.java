@@ -22,12 +22,15 @@ public class Enemy {
 		this.dy = dy;
 		final Enemy e = this;
 		enemies.add(e);
+		
 		new Thread(){
 			public void run(){
 				try{	
 					Rectangle r = new Rectangle();
 					Rectangle pr= new Rectangle();
+					Rectangle sr = new Rectangle();
 					while(e.y < Frame.GameFrame.HEIGHT){
+						
 						e.y += e.dy;
 						r.setBounds((int)e.x,(int)e.y,e.width,e.height);
 						for(Projectile p: Projectile.projectiles){

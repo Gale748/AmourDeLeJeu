@@ -30,6 +30,7 @@ public class Frame extends JFrame{
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
 	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
+	static Image background_Image = ImageLoader.getImageFrom("background.png");
 
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	public Frame(){
@@ -93,6 +94,8 @@ public class Frame extends JFrame{
 		FPS++;
 	}
 	private void paintComponent(Graphics g){
+		//background
+		g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
 		//FPS
 		g.drawString("FPS: " + BufferedFPS + " Score: " + score,5 , 590);
 		//Projectiles
