@@ -10,6 +10,7 @@ public class EnemySpawner extends Thread{
 		try{
 			Thread.sleep(3000);
 			while(true){
+				//Create Enemy
 				new Enemy(rand.nextInt(700) + 50, -50,50,50,0,0.4);
 				Thread.sleep(1000);
 			}
