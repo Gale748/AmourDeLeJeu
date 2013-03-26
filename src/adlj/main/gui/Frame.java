@@ -18,21 +18,30 @@ import adlj.main.listeners.MMListener;
 import adlj.main.threads.EnemySpawner;
 
 public class Frame extends JFrame{
+	//ints
 	public static int WIDTH = 800;
 	public static int HEIGHT = 600;
-	static Image img;
+	public static int LIVES = 3;
 	static int FPS= 0;
 	static int BufferedFPS = 0;
-	public static int score = 0;
+	public static int SCORE = 0;
+	static int tehSCORE = 200;
+	
 	public static Frame GameFrame;
+	
 	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
+	
 	static long startTime = System.currentTimeMillis();
+	
+	static Image img;
+	
+	//Import Images
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
 	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
 	static Image background_Image = ImageLoader.getImageFrom("background.png");
-
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
+	
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -45,9 +54,12 @@ public class Frame extends JFrame{
 		addMouseListener(new MListener());
 		//addKeyListener(new KListener());
 	}
+	
 	public static void main(String[] args){
+		//Initialize Frame
 		init();
 	}
+	
 	public static void init(){
 		GameFrame = new Frame();
 		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
@@ -87,6 +99,17 @@ public class Frame extends JFrame{
 		new EnemySpawner().start();
 		new PlayerShip(WIDTH/2-25,HEIGHT*5/6-25,50,50);
 	}
+	
+	public static void addScore(int i){
+		//Add to Score
+		SCORE+=i;
+		//Add to "tehSCORE"
+		tehSCORE -= i;
+		if(tehSCORE <= 0){
+			tehSCORE = 200 + tehSCORE;
+			LIVES++;
+		}
+	}
 	public void paint(Graphics g){
 		img = createImage(WIDTH,HEIGHT);
 		paintComponent(img.getGraphics());
@@ -97,7 +120,7 @@ public class Frame extends JFrame{
 		//background
 		g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
 		//FPS
-		g.drawString("FPS: " + BufferedFPS + " Score: " + score,5 , 590);
+		g.drawString("FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + LIVES,5 , 590);
 		//Projectiles
 		for(Projectile p: Projectile.projectiles){
 			g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);

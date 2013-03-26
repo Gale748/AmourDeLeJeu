@@ -30,6 +30,7 @@ public class EnemyProjectile {
 						e.y += e.dy;
 						r.setBounds((int)e.x,(int)e.y,w,h);
 						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
+							onPlayerCollision();
 							projectiles.remove(e);
 							this.join();
 						}
@@ -40,5 +41,10 @@ public class EnemyProjectile {
 				}
 			}
 		}.start();
+	}
+	private void onPlayerCollision(){
+		Frame.LIVES--;
+		if(Frame.LIVES < 0)
+			System.exit(0);
 	}
 }
