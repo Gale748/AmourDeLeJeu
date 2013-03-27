@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 
@@ -14,6 +15,7 @@ import adlj.main.entity.Enemy;
 import adlj.main.entity.EnemyProjectile;
 import adlj.main.entity.PlayerShip;
 import adlj.main.entity.Projectile;
+import adlj.main.entity.powerups.Shield;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
 import adlj.main.threads.EnemySpawner;
@@ -22,7 +24,6 @@ public class Frame extends JFrame{
 	//ints
 	public static int WIDTH = 800;
 	public static int HEIGHT = 600;
-	public static int LIVES = 3;
 	static int FPS= 0;
 	static int BufferedFPS = 0;
 	public static int SCORE = 0;
@@ -114,7 +115,7 @@ public class Frame extends JFrame{
 			tehSCORE -= i;
 			if(tehSCORE <= 0){
 				tehSCORE = 200 + tehSCORE;
-				LIVES++;
+				PlayerShip.LIVES++;
 			}
 	}
 	public void paint(Graphics g){
@@ -128,9 +129,16 @@ public class Frame extends JFrame{
 			//g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
+		//Shield Powerups
+			g.setColor(Color.CYAN);
+			for(Shield s: Shield.shields){
+				g.fillRect(s.x, s.y, s.width, s.height);
+			}
+			if(PlayerShip.SHIELDED)
+				g.fillRect((int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height);
 		//Draw Info String
 			g.setColor(INFO_COLOR);
-			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + LIVES;
+			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES;
 			g.drawString(INFO,5 , 590);
 		//Projectiles
 			for(Projectile p: Projectile.projectiles){

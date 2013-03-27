@@ -43,8 +43,6 @@ public class EnemyProjectile {
 		}.start();
 	}
 	private void onPlayerCollision(){
-		Frame.LIVES--;
-		if(Frame.LIVES < 0)
-			System.exit(0);
+		PlayerShip.onCollision();
 	}
 }

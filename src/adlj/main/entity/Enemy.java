@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import adlj.main.entity.powerups.Shield;
 import adlj.main.gui.Frame;
 
 public class Enemy {
@@ -79,8 +80,11 @@ public class Enemy {
 		}.start();
 	}
 	private void onPlayerCollision(){
-		
+		PlayerShip.onCollision();
 	}private void onProjectileCollision(){
+		if ((new Random().nextInt(100))> 70){
+			new Shield((int)x+width/2,(int)y+height/2);
+		}
 		Frame.addScore(10);
 	}
 }
