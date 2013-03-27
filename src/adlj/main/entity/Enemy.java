@@ -14,7 +14,7 @@ public class Enemy {
 	 */
 	static int projectile_wait_time[] = {800,1200};
 	public double x, y,dx,dy;
-	public static double movement_speed[] = {0.4,0.2};
+	public static double movement_speed[] = {0.2,0.4};
 	public int width, height;
 	private boolean exists = true;
 	public int type;
