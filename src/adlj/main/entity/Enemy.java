@@ -8,18 +8,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import adlj.main.gui.Frame;
 
 public class Enemy {
+	/*
+	 * Enemy 1 = Green 
+	 * Enemy 2 = Purple
+	 */
+	static int projectile_wait_time[] = {800,1200};
 	public double x, y,dx,dy;
+	public static double movement_speed[] = {0.4,0.2};
 	public int width, height;
 	private boolean exists = true;
-	public int type = new Random().nextInt(2);
+	public int type;
 	public static List<Enemy> enemies = new CopyOnWriteArrayList<Enemy>();
-	public Enemy(double x, double y, int w, int h, double dx, double dy){
+	public Enemy(double x, double y, int w, int h, double dx, double dy, final int type){
 		this.x= x ;
 		this.y = y;
 		this.width = w;
 		this.height = h;
 		this.dx = dx;
 		this.dy = dy;
+		this.type = type;
 		final Enemy e = this;
 		enemies.add(e);
 		
@@ -60,9 +67,10 @@ public class Enemy {
 			public void run(){
 				try{
 					while(exists){
-						Thread.sleep(800);
+						Thread.sleep(projectile_wait_time[type]);
 						if(exists)
 						new EnemyProjectile(e.x + e.width/2 - 5, e.y+10, 10, 20,0, 1, type);
+						
 					}
 				}catch(Exception e){
 					e.printStackTrace();

@@ -1,5 +1,6 @@
 package adlj.main.gui;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -33,6 +34,8 @@ public class Frame extends JFrame{
 	String INFO = "";
 	
 	static long startTime = System.currentTimeMillis();
+	
+	static Color INFO_COLOR = Color.black;
 	
 	static Image img;
 	
@@ -122,8 +125,11 @@ public class Frame extends JFrame{
 	}
 	private void paintComponent(Graphics g){
 		//Draw Background Image
-			g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
+			//g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
+			g.setColor(Color.LIGHT_GRAY);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 		//Draw Info String
+			g.setColor(INFO_COLOR);
 			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + LIVES;
 			g.drawString(INFO,5 , 590);
 		//Projectiles
