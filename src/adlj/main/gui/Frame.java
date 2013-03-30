@@ -31,7 +31,7 @@ public class Frame extends JFrame{
 	
 	public static Frame GameFrame;
 	
-	String TITLE = "YoloSwaggerJacker420XxNoMercyxX";
+	String TITLE = "PsychoticChildren";
 	String INFO = "";
 	
 	static long startTime = System.currentTimeMillis();
@@ -46,7 +46,7 @@ public class Frame extends JFrame{
 	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
 	static Image background_Image = ImageLoader.getImageFrom("background.png");
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
-	
+	static Image shield_Image = ImageLoader.getImageFrom("Shield.png");
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -132,11 +132,9 @@ public class Frame extends JFrame{
 		//Shield Powerups
 			g.setColor(Color.CYAN);
 			for(Shield s: Shield.shields){
-				g.fillRect(s.x, s.y, s.width, s.height);
+				g.drawImage(shield_Image,s.x, s.y, s.width, s.height,this);
 			}
-			if(PlayerShip.SHIELDED)
-				g.fillRect((int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height);
-		//Draw Info String
+					//Draw Info String
 			g.setColor(INFO_COLOR);
 			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES;
 			g.drawString(INFO,5 , 590);
@@ -153,6 +151,8 @@ public class Frame extends JFrame{
 		}
 		//Ship
 			g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
-		
+			if(PlayerShip.SHIELDED)
+				g.drawImage(shield_Image,(int)PlayerShip.x-4, (int)PlayerShip.y-4, PlayerShip.width+8, PlayerShip.height+8,this);
+
 	}
 }

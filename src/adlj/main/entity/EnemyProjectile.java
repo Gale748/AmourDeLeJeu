@@ -36,6 +36,7 @@ public class EnemyProjectile {
 						}
 						Thread.sleep(2);
 					}
+					projectiles.remove(e);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
