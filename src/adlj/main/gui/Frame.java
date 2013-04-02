@@ -28,6 +28,8 @@ public class Frame extends JFrame{
 	static int BufferedFPS = 0;
 	public static int SCORE = 0;
 	static int tehSCORE = 200;
+	public static int KILLED = 0;
+	public static int LEVEL = 0;
 	
 	public static Frame GameFrame;
 	
@@ -35,6 +37,7 @@ public class Frame extends JFrame{
 	String INFO = "";
 	
 	static long startTime = System.currentTimeMillis();
+	static long previousTime = startTime;
 	
 	static Color INFO_COLOR = Color.black;
 	
@@ -77,9 +80,9 @@ public class Frame extends JFrame{
 				public void run(){
 					try{
 						while(true){
-							if(System.currentTimeMillis() - startTime > 15){
+							if(System.currentTimeMillis() - previousTime > 15){
 								GameFrame.repaint();
-								startTime=System.currentTimeMillis();
+								previousTime=System.currentTimeMillis();
 							}else{
 								Thread.sleep(1);
 							}
@@ -134,9 +137,10 @@ public class Frame extends JFrame{
 			for(Shield s: Shield.shields){
 				g.drawImage(shield_Image,s.x, s.y, s.width, s.height,this);
 			}
-					//Draw Info String
+		//Draw Info String
 			g.setColor(INFO_COLOR);
-			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES;
+			LEVEL = (int) (Math.round(Math.log(KILLED/2)/Math.log(2))+1);
+			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + (int)Math.floor((System.currentTimeMillis()-startTime)/1000) +" seconds";
 			g.drawString(INFO,5 , 590);
 		//Projectiles
 			for(Projectile p: Projectile.projectiles){

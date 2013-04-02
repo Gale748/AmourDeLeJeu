@@ -85,6 +85,7 @@ public class Enemy {
 		if ((new Random().nextInt(100))> 70){
 			new Shield((int)x+width/2,(int)y+height/2);
 		}
+		Frame.KILLED +=1;
 		Frame.addScore(10);
 	}
 }

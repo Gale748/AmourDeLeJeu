@@ -14,37 +14,39 @@ public class Shield {
 	public Shield(int x, int y){
 		this.x = x;
 		this.y = y;
-		shields.add(this);
-		final Rectangle r = new Rectangle();
-		r.setBounds(x,y,width,height);
-		final Shield s = this;
-		new Thread(){
-			public void run(){
-				try{
-					while(alive){
-						Thread.sleep(10);
-						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
-							s.destroy();
-							PlayerShip.SHIELDED = true;
-							this.join();
+		if(shields.size()<3){
+			shields.add(this);
+			final Rectangle r = new Rectangle();
+			r.setBounds(x,y,width,height);
+			final Shield s = this;
+			new Thread(){
+				public void run(){
+					try{
+						while(alive){
+							Thread.sleep(10);
+							if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
+								s.destroy();
+								PlayerShip.SHIELDED = true;
+								this.join();
+							}
 						}
+					}catch(Exception e){
+						e.printStackTrace();
 					}
-				}catch(Exception e){
-					e.printStackTrace();
 				}
-			}
-		}.start();
-		new Thread(){
-			public void run(){
-				try{
-					Thread.sleep(7000);
-					alive = false;
-					s.destroy();
-				}catch(Exception e){
-					e.printStackTrace();
+			}.start();
+			new Thread(){
+				public void run(){
+					try{
+						Thread.sleep(7000);
+						alive = false;
+						s.destroy();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
-			}
-		}.start();
+			}.start();
+		}
 	}
 	public void destroy(){
 		shields.remove(this);
