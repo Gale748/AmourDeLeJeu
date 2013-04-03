@@ -19,6 +19,7 @@ import adlj.main.entity.powerups.Boom;
 import adlj.main.entity.powerups.Shield;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
+import adlj.main.threads.BoomAnimation;
 import adlj.main.threads.EnemySpawner;
 
 public class Frame extends JFrame{
@@ -51,6 +52,8 @@ public class Frame extends JFrame{
 	static Image background_Image = ImageLoader.getImageFrom("background.png");
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	static Image shield_Image = ImageLoader.getImageFrom("Shield.png");
+	static Image bomb_Image = ImageLoader.getImageFrom("BombImage.png");
+	static Image bombAni_Image[] = {ImageLoader.getImageFrom("FadeoutBomb0.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb3.png")};
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -138,9 +141,8 @@ public class Frame extends JFrame{
 				g.drawImage(shield_Image,s.x, s.y, s.width, s.height,this);
 			}
 		//Boom Powerups
-			g.setColor(Color.CYAN);
 			for(Boom b: Boom.booms){
-				g.fillRect(b.x, b.y, b.width, b.height);
+				g.drawImage(bomb_Image,b.x, b.y, b.width, b.height,this);
 			}
 		//Draw Info String
 			g.setColor(INFO_COLOR);
@@ -162,6 +164,9 @@ public class Frame extends JFrame{
 			g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
 			if(PlayerShip.SHIELDED)
 				g.drawImage(shield_Image,(int)PlayerShip.x-4, (int)PlayerShip.y-4, PlayerShip.width+8, PlayerShip.height+8,this);
-
+		//BoomAni
+			if(BoomAnimation.animating){
+				g.drawImage(bombAni_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
+			}
 	}
 }

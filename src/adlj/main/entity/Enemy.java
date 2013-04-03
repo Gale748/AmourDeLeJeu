@@ -44,7 +44,7 @@ public class Enemy {
 						r.setBounds((int)e.x,(int)e.y,e.width,e.height);
 						for(Projectile p: Projectile.projectiles){
 							pr.setBounds((int)p.x,(int)p.y,p.width,p.height);
-							if(r.intersects(pr)){
+							if(r.intersects(pr) && alive){
 								enemies.remove(e);
 								Projectile.projectiles.remove(p);
 								onProjectileCollision();
@@ -52,7 +52,7 @@ public class Enemy {
 								this.join();
 							}
 						}
-						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
+						if((r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)) && alive){
 							enemies.remove(e);
 							onPlayerCollision();
 							e.alive = false;
