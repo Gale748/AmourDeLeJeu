@@ -15,6 +15,7 @@ import adlj.main.entity.Enemy;
 import adlj.main.entity.EnemyProjectile;
 import adlj.main.entity.PlayerShip;
 import adlj.main.entity.Projectile;
+import adlj.main.entity.powerups.Boom;
 import adlj.main.entity.powerups.Shield;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
@@ -133,9 +134,13 @@ public class Frame extends JFrame{
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 		//Shield Powerups
-			g.setColor(Color.CYAN);
 			for(Shield s: Shield.shields){
 				g.drawImage(shield_Image,s.x, s.y, s.width, s.height,this);
+			}
+		//Boom Powerups
+			g.setColor(Color.CYAN);
+			for(Boom b: Boom.booms){
+				g.fillRect(b.x, b.y, b.width, b.height);
 			}
 		//Draw Info String
 			g.setColor(INFO_COLOR);
