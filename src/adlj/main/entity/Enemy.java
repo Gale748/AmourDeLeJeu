@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import adlj.main.entity.powerups.Boom;
 import adlj.main.entity.powerups.Shield;
 import adlj.main.gui.Frame;
 
@@ -17,8 +18,8 @@ public class Enemy {
 	public double x, y,dx,dy;
 	public static double movement_speed[] = {0.2,0.4};
 	public int width, height;
-	private boolean exists = true;
 	public int type;
+	public boolean alive = true;
 	public static List<Enemy> enemies = new CopyOnWriteArrayList<Enemy>();
 	public Enemy(double x, double y, int w, int h, double dx, double dy, final int type){
 		this.x= x ;
@@ -47,14 +48,14 @@ public class Enemy {
 								enemies.remove(e);
 								Projectile.projectiles.remove(p);
 								onProjectileCollision();
-								e.exists = false;
+								e.alive = false;
 								this.join();
 							}
 						}
 						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
 							enemies.remove(e);
 							onPlayerCollision();
-							e.exists = false;
+							e.alive = false;
 							this.join();
 						}
 						Thread.sleep(2);
@@ -67,9 +68,9 @@ public class Enemy {
 		new Thread(){
 			public void run(){
 				try{
-					while(exists){
+					while(alive){
 						Thread.sleep(projectile_wait_time[type]);
-						if(exists)
+						if(alive)
 						new EnemyProjectile(e.x + e.width/2 - 5, e.y+10, 10, 20,0, 1, type);
 						
 					}
@@ -79,11 +80,18 @@ public class Enemy {
 		}
 		}.start();
 	}
+	public void destroy(){
+		alive = false;
+		enemies.remove(this);
+	}
 	private void onPlayerCollision(){
 		PlayerShip.onCollision();
 	}private void onProjectileCollision(){
-		if ((new Random().nextInt(100))> 70){
+		int i = new Random().nextInt(100);
+		if (i > 70){
 			new Shield((int)x+width/2,(int)y+height/2);
+		}else if(i > 60){
+			new Boom((int)x+width/2,(int)y+height/2);
 		}
 		Frame.KILLED +=1;
 		Frame.addScore(10);
