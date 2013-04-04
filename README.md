@@ -1,3 +1,3 @@
 AmourDeLeJeu
 ============
-I love to add empty README's.
+I love to add empty READMEs.
