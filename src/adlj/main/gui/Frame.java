@@ -53,7 +53,7 @@ public class Frame extends JFrame{
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	static Image shield_Image = ImageLoader.getImageFrom("Shield.png");
 	static Image bomb_Image = ImageLoader.getImageFrom("BombImage.png");
-	static Image bombAniRev_Image[] = {ImageLoader.getImageFrom("FadeoutBomb4.png"),ImageLoader.getImageFrom("FadeoutBomb3.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb1.png")};
+	static Image bombAniRev_Image[] = {ImageLoader.getImageFrom("FadeoutBomb3.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb0.png")};
 	static Image bombAni_Image[] = {ImageLoader.getImageFrom("FadeoutBomb0.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb3.png")};
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
