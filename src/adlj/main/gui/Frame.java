@@ -53,6 +53,7 @@ public class Frame extends JFrame{
 	static Image ship_Image = ImageLoader.getImageFrom("SpaceShip.png");
 	static Image shield_Image = ImageLoader.getImageFrom("Shield.png");
 	static Image bomb_Image = ImageLoader.getImageFrom("BombImage.png");
+	static Image bombAniRev_Image[] = {ImageLoader.getImageFrom("FadeoutBomb4.png"),ImageLoader.getImageFrom("FadeoutBomb3.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb1.png")};
 	static Image bombAni_Image[] = {ImageLoader.getImageFrom("FadeoutBomb0.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb3.png")};
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
@@ -164,6 +165,10 @@ public class Frame extends JFrame{
 			g.drawImage(ship_Image,(int)PlayerShip.x, (int)PlayerShip.y, PlayerShip.width, PlayerShip.height,this);
 			if(PlayerShip.SHIELDED)
 				g.drawImage(shield_Image,(int)PlayerShip.x-4, (int)PlayerShip.y-4, PlayerShip.width+8, PlayerShip.height+8,this);
+		//BoomAniRev
+			if(BoomAnimation.animating){
+				g.drawImage(bombAniRev_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
+			}
 		//BoomAni
 			if(BoomAnimation.animating){
 				g.drawImage(bombAni_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
