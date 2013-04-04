@@ -170,8 +170,8 @@ public class Frame extends JFrame{
 				g.drawImage(bombAniRev_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
 			}
 		//BoomAni
-			if(BoomAnimation.animating){
-				g.drawImage(bombAni_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
+		if(BoomAnimation.animating){
+			g.drawImage(bombAni_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
 			}
 	}
 }
