@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 
@@ -22,6 +21,7 @@ import adlj.main.listeners.MMListener;
 import adlj.main.threads.BoomAnimation;
 import adlj.main.threads.EnemySpawner;
 
+@SuppressWarnings("serial")
 public class Frame extends JFrame{
 	//ints
 	public static int WIDTH = 800;

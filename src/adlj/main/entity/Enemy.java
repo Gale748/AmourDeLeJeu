@@ -37,8 +37,7 @@ public class Enemy {
 				try{	
 					Rectangle r = new Rectangle();
 					Rectangle pr= new Rectangle();
-					Rectangle sr = new Rectangle();
-					while(e.y < Frame.GameFrame.HEIGHT){
+					while(e.y < Frame.HEIGHT){
 						
 						e.y += e.dy;
 						r.setBounds((int)e.x,(int)e.y,e.width,e.height);

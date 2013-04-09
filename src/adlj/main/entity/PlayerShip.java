@@ -11,10 +11,10 @@ public class PlayerShip {
 	public static int LIVES = 3;
 	public static boolean SHIELDED = false;
 	public PlayerShip(double x, double y, int w, int h){
-		this.x = x;
-		this.y = y;
-		this.width = w;
-		this.height = h;
+		PlayerShip.x = x;
+		PlayerShip.y = y;
+		PlayerShip.width = w;
+		PlayerShip.height = h;
 	}
 	public static void move(double dx, double dy){
 		x += dx;

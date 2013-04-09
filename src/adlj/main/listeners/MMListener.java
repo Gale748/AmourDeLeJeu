@@ -11,8 +11,8 @@ public class MMListener implements MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		this.x = e.getX();
-		this.y = e.getY();
+		MMListener.x = e.getX();
+		MMListener.y = e.getY();
 		if(!(KListener.keys[KeyEvent.VK_A] || KListener.keys[KeyEvent.VK_D])){
 			PlayerShip.x = x - PlayerShip.width/2;
 			PlayerShip.y = y - PlayerShip.height/2;
@@ -22,8 +22,8 @@ public class MMListener implements MouseMotionListener{
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		this.x = e.getX();
-		this.y = e.getY();
+		MMListener.x = e.getX();
+		MMListener.y = e.getY();
 		if(!(KListener.keys[KeyEvent.VK_A] || KListener.keys[KeyEvent.VK_D])){
 			PlayerShip.x = x - PlayerShip.width/2;
 			PlayerShip.y = y - PlayerShip.height/2;

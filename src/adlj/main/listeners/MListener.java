@@ -28,7 +28,7 @@ public class MListener implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getButton()==e.BUTTON1){
+		if (e.getButton()==MouseEvent.BUTTON1){
 		pressed = true;
 		new Thread(){
 			public void run(){
