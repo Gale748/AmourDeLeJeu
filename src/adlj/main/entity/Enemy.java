@@ -14,9 +14,9 @@ public class Enemy {
 	 * Enemy 1 = Green 
 	 * Enemy 2 = Purple
 	 */
-	static int projectile_wait_time[] = {800,1200};
+	static int projectile_wait_time[] = {700,1100};
 	public double x, y,dx,dy;
-	public static double movement_speed[] = {0.1,0.3};
+	public static double movement_speed[] = {0.2,0.4};
 	public int width, height;
 	public int type;
 	public boolean alive = true;
@@ -68,10 +68,9 @@ public class Enemy {
 			public void run(){
 				try{
 					while(alive){
-						Thread.sleep(projectile_wait_time[type]);
 						if(alive)
-						new EnemyProjectile(e.x + e.width/2 - 5, e.y+10, 10, 20,0, 1, type);
-						
+							new EnemyProjectile(e.x + e.width/2 - 5, e.y+10, 10, 20,0, 1, type);
+						Thread.sleep(projectile_wait_time[type]);			
 					}
 				}catch(Exception e){
 					e.printStackTrace();

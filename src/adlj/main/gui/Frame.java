@@ -31,7 +31,8 @@ public class Frame extends JFrame{
 	public static int SCORE = 0;
 	static int tehSCORE = 200;
 	public static int KILLED = 0;
-	public static int LEVEL = 0;
+	public static int LEVEL = 1;
+	private static int LASTLEVEL = 1;
 	
 	public static Frame GameFrame;
 	
@@ -114,8 +115,36 @@ public class Frame extends JFrame{
 		new EnemySpawner().start();
 		//Initialize
 		new PlayerShip(WIDTH/2-25,HEIGHT*5/6-25,50,50);
+		new Thread(){
+			public void run(){
+				try{
+					while(true){
+						LEVEL = (int) (Math.round(Math.log(KILLED/2)/Math.log(2))+1);
+						if(LEVEL > LASTLEVEL){
+							onLevelUp();
+							LASTLEVEL = LEVEL;
+							new BoomAnimation().start();
+						}
+						Thread.sleep(100);
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}.start();
 	}
-	
+	public static void onLevelUp(){
+		for(Enemy e: Enemy.enemies){
+			e.destroy();
+			Frame.addScore(10);
+		}
+		for(EnemyProjectile ep: EnemyProjectile.projectiles){
+			ep.destroy();
+		}
+		for(Boom b: Boom.booms){
+			b.destroy();
+		}
+	}
 	public static void addScore(int i){
 		//Add to Score
 			SCORE+=i;
@@ -147,7 +176,6 @@ public class Frame extends JFrame{
 			}
 		//Draw Info String
 			g.setColor(INFO_COLOR);
-			LEVEL = (int) (Math.round(Math.log(KILLED/2)/Math.log(2))+1);
 			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + (int)Math.floor((System.currentTimeMillis()-startTime)/1000) +" seconds";
 			g.drawString(INFO,5 , 590);
 		//Projectiles
