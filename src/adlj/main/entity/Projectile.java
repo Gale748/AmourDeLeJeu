@@ -3,6 +3,8 @@ package adlj.main.entity;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import adlj.main.gui.Frame;
+
 public class Projectile {
 	public double x, y;
 	public int width, height;
@@ -21,6 +23,7 @@ public class Projectile {
 			public void run(){
 				try{
 					while(p.y + p.height > 0){
+						if(!Frame.paused)
 						p.y += p.dy;
 						Thread.sleep(2);
 					}

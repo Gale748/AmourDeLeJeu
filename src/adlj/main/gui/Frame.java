@@ -20,6 +20,7 @@ import adlj.main.listeners.KListener;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
 import adlj.main.threads.BoomAnimation;
+import adlj.main.threads.ElapsedTime;
 import adlj.main.threads.EnemySpawner;
 import adlj.main.threads.LevelUpAnimation;
 
@@ -49,6 +50,7 @@ public class Frame extends JFrame{
 	static Image img;
 	
 	public static boolean showInfo = true;
+	public static boolean paused = false;
 	
 	//Import Images
 	static Image levelup_Image[] = {ImageLoader.getImageFrom("levelup.png"), ImageLoader.getImageFrom("levelupinvert.png")};
@@ -78,14 +80,15 @@ public class Frame extends JFrame{
 		//Initialize Frame
 		init();
 	}
-	
+	private static void setBlankCursor(){
+		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+		    cursorImg, new Point(0, 0), "blank cursor");
+		GameFrame.getContentPane().setCursor(blankCursor);
+	}
 	public static void init(){
 		GameFrame = new Frame();
-		//Invisible Cursor Mode
-			BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-			Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-			    cursorImg, new Point(0, 0), "blank cursor");
-			GameFrame.getContentPane().setCursor(blankCursor);
+		setBlankCursor();
 		//Paint Loop Thread
 			new Thread(){
 				public void run(){
@@ -137,6 +140,14 @@ public class Frame extends JFrame{
 				}
 			}
 		}.start();
+		new ElapsedTime().start();
+	}
+	public static void onPauseButton(){
+		if(paused){
+			paused = false;
+		}else{
+			paused = true;
+		}
 	}
 	public static void onLevelUp(){
 		for(Enemy e: Enemy.enemies){
@@ -183,7 +194,7 @@ public class Frame extends JFrame{
 		//Draw Info String
 			if(showInfo){
 				g.setColor(INFO_COLOR);
-				INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + (int)Math.floor((System.currentTimeMillis()-startTime)/1000) +" seconds";
+				INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + ElapsedTime.elapsedtime +" seconds";
 				g.drawString(INFO,5 , 590);
 			}
 		//Projectiles

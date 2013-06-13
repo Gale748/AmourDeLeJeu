@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import adlj.main.gui.Frame;
+
 public class EnemyProjectile {
 	public double x, y, dx, dy;
 	public int width, height;
@@ -25,6 +27,7 @@ public class EnemyProjectile {
 				try{	
 					Rectangle r = new Rectangle();
 					while(e.y > 0){
+						if(!Frame.paused)
 						e.y += e.dy;
 						r.setBounds((int)e.x,(int)e.y,w,h);
 						if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){

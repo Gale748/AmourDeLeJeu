@@ -3,7 +3,6 @@ package adlj.main.listeners;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import adlj.main.entity.PlayerShip;
 import adlj.main.gui.Frame;
 
 public class KListener implements KeyListener{
@@ -54,6 +53,11 @@ public class KListener implements KeyListener{
 				}else{
 					Frame.showInfo = true;
 				}
+			}
+	//esc
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+				Frame.onPauseButton();
+				
 			}
 	}
 	@Override

@@ -38,9 +38,10 @@ public class Enemy {
 					Rectangle r = new Rectangle();
 					Rectangle pr= new Rectangle();
 					while(e.y < Frame.HEIGHT){
-						
+						if(!Frame.paused){
 						e.y += e.dy;
 						r.setBounds((int)e.x,(int)e.y,e.width,e.height);
+						}
 						for(Projectile p: Projectile.projectiles){
 							pr.setBounds((int)p.x,(int)p.y,p.width,p.height);
 							if(r.intersects(pr) && alive){
