@@ -16,10 +16,12 @@ import adlj.main.entity.PlayerShip;
 import adlj.main.entity.Projectile;
 import adlj.main.entity.powerups.Boom;
 import adlj.main.entity.powerups.Shield;
+import adlj.main.listeners.KListener;
 import adlj.main.listeners.MListener;
 import adlj.main.listeners.MMListener;
 import adlj.main.threads.BoomAnimation;
 import adlj.main.threads.EnemySpawner;
+import adlj.main.threads.LevelUpAnimation;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame{
@@ -46,7 +48,10 @@ public class Frame extends JFrame{
 	
 	static Image img;
 	
+	public static boolean showInfo = true;
+	
 	//Import Images
+	static Image levelup_Image[] = {ImageLoader.getImageFrom("levelup.png"), ImageLoader.getImageFrom("levelupinvert.png")};
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
 	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
@@ -66,7 +71,7 @@ public class Frame extends JFrame{
 		//Listeners
 		addMouseMotionListener(new MMListener());
 		addMouseListener(new MListener());
-		//addKeyListener(new KListener());
+		addKeyListener(new KListener());
 	}
 	
 	public static void main(String[] args){
@@ -144,6 +149,7 @@ public class Frame extends JFrame{
 		for(Boom b: Boom.booms){
 			b.destroy();
 		}
+		new LevelUpAnimation().start();
 	}
 	public static void addScore(int i){
 		//Add to Score
@@ -175,9 +181,11 @@ public class Frame extends JFrame{
 				g.drawImage(bomb_Image,b.x, b.y, b.width, b.height,this);
 			}
 		//Draw Info String
-			g.setColor(INFO_COLOR);
-			INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + (int)Math.floor((System.currentTimeMillis()-startTime)/1000) +" seconds";
-			g.drawString(INFO,5 , 590);
+			if(showInfo){
+				g.setColor(INFO_COLOR);
+				INFO = "FPS: " + BufferedFPS + " Score: " + SCORE + " Lives: " + PlayerShip.LIVES + " Enemies Killed: "+ KILLED +" Level: " + LEVEL + " Time Elapsed: " + (int)Math.floor((System.currentTimeMillis()-startTime)/1000) +" seconds";
+				g.drawString(INFO,5 , 590);
+			}
 		//Projectiles
 			for(Projectile p: Projectile.projectiles){
 				g.drawImage(projectile_Image,(int)p.x, (int)p.y, p.width, p.height,this);
@@ -201,5 +209,9 @@ public class Frame extends JFrame{
 		if(BoomAnimation.animating){
 			g.drawImage(bombAni_Image[BoomAnimation.state], 0, 0, WIDTH, HEIGHT, this);
 			}
+		//LevelUpAni
+		if(LevelUpAnimation.animating){
+			g.drawImage(levelup_Image[LevelUpAnimation.state], 200, 100, 400, 100, this);
+		}
 	}
 }

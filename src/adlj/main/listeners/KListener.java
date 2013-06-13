@@ -4,13 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import adlj.main.entity.PlayerShip;
+import adlj.main.gui.Frame;
 
 public class KListener implements KeyListener{
 	public static boolean keys[] = new boolean[65536];
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		// TODO Auto-generated method stub
 		keys[e.getKeyCode()] = true;
+		/*
 		//A
 		if(e.getKeyCode() == KeyEvent.VK_A){
 			new Thread(){
@@ -43,8 +46,16 @@ public class KListener implements KeyListener{
 						}
 					}.start();
 				}
+				*/
+	//F1
+			if(e.getKeyCode() == KeyEvent.VK_F1){
+				if(Frame.showInfo){
+					Frame.showInfo = false;
+				}else{
+					Frame.showInfo = true;
+				}
+			}
 	}
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub

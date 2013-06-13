@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import adlj.main.entity.PlayerShip;
+import adlj.main.gui.Frame;
 
 public class Shield {
 	public int x, y;
@@ -26,6 +27,8 @@ public class Shield {
 							Thread.sleep(10);
 							if(r.intersects(PlayerShip.x,PlayerShip.y,PlayerShip.width,PlayerShip.height)){
 								s.destroy();
+								if(PlayerShip.SHIELDED)
+									Frame.addScore(20);
 								PlayerShip.SHIELDED = true;
 								this.join();
 							}
