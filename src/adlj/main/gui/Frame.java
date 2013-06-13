@@ -55,6 +55,7 @@ public class Frame extends JFrame{
 	//Import Images
 	static Image levelup_Image[] = {ImageLoader.getImageFrom("levelup.png"), ImageLoader.getImageFrom("levelupinvert.png")};
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
+	static Image paused_Image = ImageLoader.getImageFrom("paused.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
 	static Image enemyProjectile_Image[] = {ImageLoader.getImageFrom("Enemy1Proj.png"),ImageLoader.getImageFrom("Enemy2Proj.png")};
 	static Image background_Image = ImageLoader.getImageFrom("background.png");
@@ -179,6 +180,7 @@ public class Frame extends JFrame{
 		FPS++;
 	}
 	private void paintComponent(Graphics g){
+		
 		//Draw Background Image
 			//g.drawImage(background_Image, 0,0, WIDTH, HEIGHT,this);
 			g.setColor(Color.LIGHT_GRAY);
@@ -224,5 +226,11 @@ public class Frame extends JFrame{
 		if(LevelUpAnimation.animating){
 			g.drawImage(levelup_Image[LevelUpAnimation.state], 200, 100, 400, 100, this);
 		}
+		//Mouse when paused
+				if(paused){
+					g.drawImage(paused_Image, 200, 250, 400, 100, this);
+					g.setColor(Color.BLACK);
+					g.fillRect(MMListener.x, MMListener.y, 5, 5);
+				}
 	}
 }
