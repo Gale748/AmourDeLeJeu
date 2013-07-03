@@ -234,8 +234,9 @@ public class Frame extends JFrame{
 			}
 		//LevelUpAni
 		if(LevelUpAnimation.animating){
-			g.drawImage(levelup_Image[LevelUpAnimation.state%2], 200, 100, 400, 100, this);
+			
 			g.drawImage(levelupbackground_Image[LevelUpAnimation.state], 0, 0, 800,600, this);
+			g.drawImage(levelup_Image[LevelUpAnimation.state%2], 200, 100, 400, 100, this);
 		}
 		//Mouse when paused
 				if(paused){
