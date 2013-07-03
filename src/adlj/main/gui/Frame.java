@@ -54,6 +54,7 @@ public class Frame extends JFrame{
 	
 	//Import Images
 	static Image levelup_Image[] = {ImageLoader.getImageFrom("levelup.png"), ImageLoader.getImageFrom("levelupinvert.png")};
+	static Image levelupbackground_Image[] = {ImageLoader.getImageFrom("levelupb0.png"), ImageLoader.getImageFrom("levelupb1.png"), ImageLoader.getImageFrom("levelupb2.png"), ImageLoader.getImageFrom("levelupb3.png"), ImageLoader.getImageFrom("levelupb4.png")};
 	static Image projectile_Image = ImageLoader.getImageFrom("Projectile.png");
 	static Image paused_Image = ImageLoader.getImageFrom("paused.png");
 	static Image enemy_Image[] = {ImageLoader.getImageFrom("Enemy1.png"),ImageLoader.getImageFrom("Enemy2.png")};
@@ -64,6 +65,7 @@ public class Frame extends JFrame{
 	static Image bomb_Image = ImageLoader.getImageFrom("BombImage.png");
 	static Image bombAniRev_Image[] = {ImageLoader.getImageFrom("FadeoutBomb3.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb0.png")};
 	static Image bombAni_Image[] = {ImageLoader.getImageFrom("FadeoutBomb0.png"),ImageLoader.getImageFrom("FadeoutBomb1.png"),ImageLoader.getImageFrom("FadeoutBomb2.png"),ImageLoader.getImageFrom("FadeoutBomb3.png")};
+	
 	public Frame(){
 		setSize(WIDTH,HEIGHT);
 		setResizable(false);
@@ -132,7 +134,6 @@ public class Frame extends JFrame{
 						if(LEVEL > LASTLEVEL){
 							onLevelUp();
 							LASTLEVEL = LEVEL;
-							new BoomAnimation().start();
 						}
 						Thread.sleep(100);
 					}
@@ -146,9 +147,18 @@ public class Frame extends JFrame{
 	public static void onPauseButton(){
 		if(paused){
 			paused = false;
+			onUnpause();
 		}else{
 			paused = true;
+			onPause();
 		}
+	}
+	public static void onPause(){
+		
+	}
+	public static void onUnpause(){
+		PlayerShip.x = MMListener.x - PlayerShip.width/2;
+		PlayerShip.y = MMListener.y - PlayerShip.height/2;
 	}
 	public static void onLevelUp(){
 		for(Enemy e: Enemy.enemies){
@@ -224,7 +234,8 @@ public class Frame extends JFrame{
 			}
 		//LevelUpAni
 		if(LevelUpAnimation.animating){
-			g.drawImage(levelup_Image[LevelUpAnimation.state], 200, 100, 400, 100, this);
+			g.drawImage(levelup_Image[LevelUpAnimation.state%2], 200, 100, 400, 100, this);
+			g.drawImage(levelupbackground_Image[LevelUpAnimation.state], 0, 0, 800,600, this);
 		}
 		//Mouse when paused
 				if(paused){
