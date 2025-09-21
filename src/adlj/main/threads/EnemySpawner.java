@@ -21,7 +21,7 @@ public class EnemySpawner extends Thread{
 						new Enemy(50, -50,50,50,0,Enemy.movement_speed[type],type);
 					}
 				}
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

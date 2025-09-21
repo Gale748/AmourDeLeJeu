@@ -1,3 +1,8 @@
 AmourDeLeJeu
 ============
 I love to add empty READMEs.
+
+
+HOW TO COMPILE THIS AWFUL SRC CODE: 
+
+JUST OPEN IT UP IN ECLIPSE AND RUN IT.
